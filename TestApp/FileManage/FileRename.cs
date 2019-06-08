@@ -95,7 +95,7 @@ namespace TestApp.FileManage
         }
 
 
-        public void RenameDir()
+        public void Rename5()
         {
             var dir = @"C:\Users\huguo\OneDrive - business\A工作文件\";
             DirectoryInfo di = new DirectoryInfo(dir);
@@ -110,7 +110,12 @@ namespace TestApp.FileManage
             }
         }
 
-        public void Rename5() { }
+        public void Rename6()
+        {
+        }
+        public void Rename7()
+        {
+        }
 
     }
 }
