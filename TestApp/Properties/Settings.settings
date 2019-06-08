@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TestApp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TestApp_localhost_WebService1" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:13890/WebService1.asmx</Value>
+    </Setting>
+    <Setting Name="TestApp_DSMBJ_WebReference1_DataSwitchImp" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.255.14:8090/bjdsm-ws/services/DataSwitchImp.DataSwitchImpHttpSoap11Endpoint/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://impl.server.bjdsm.com" xmlns:ns1="http://org.apache.axis2/xsd" targetNamespace="http://impl.server.bjdsm.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://impl.server.bjdsm.com">
+      <xs:element name="identity">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ak" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="identityResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="queryData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ak" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="teName" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="queryDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="queryData4Where">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ak" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="teName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="whereXml" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="queryData4WhereResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ak" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="xmlData" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="queryData4WhereRequest">
+    <wsdl:part name="parameters" element="ns:queryData4Where" />
+  </wsdl:message>
+  <wsdl:message name="queryData4WhereResponse">
+    <wsdl:part name="parameters" element="ns:queryData4WhereResponse" />
+  </wsdl:message>
+  <wsdl:message name="identityRequest">
+    <wsdl:part name="parameters" element="ns:identity" />
+  </wsdl:message>
+  <wsdl:message name="identityResponse">
+    <wsdl:part name="parameters" element="ns:identityResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendDataRequest">
+    <wsdl:part name="parameters" element="ns:sendData" />
+  </wsdl:message>
+  <wsdl:message name="sendDataResponse">
+    <wsdl:part name="parameters" element="ns:sendDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="queryDataRequest">
+    <wsdl:part name="parameters" element="ns:queryData" />
+  </wsdl:message>
+  <wsdl:message name="queryDataResponse">
+    <wsdl:part name="parameters" element="ns:queryDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DataSwitchImpPortType">
+    <wsdl:operation name="queryData4Where">
+      <wsdl:input wsaw:Action="urn:queryData4Where" message="ns:queryData4WhereRequest" />
+      <wsdl:output wsaw:Action="urn:queryData4WhereResponse" message="ns:queryData4WhereResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="identity">
+      <wsdl:input wsaw:Action="urn:identity" message="ns:identityRequest" />
+      <wsdl:output wsaw:Action="urn:identityResponse" message="ns:identityResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="sendData">
+      <wsdl:input wsaw:Action="urn:sendData" message="ns:sendDataRequest" />
+      <wsdl:output wsaw:Action="urn:sendDataResponse" message="ns:sendDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="queryData">
+      <wsdl:input wsaw:Action="urn:queryData" message="ns:queryDataRequest" />
+      <wsdl:output wsaw:Action="urn:queryDataResponse" message="ns:queryDataResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataSwitchImpSoap11Binding" type="ns:DataSwitchImpPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="queryData4Where">
+      <soap:operation soapAction="urn:queryData4Where" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identity">
+      <soap:operation soapAction="urn:identity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendData">
+      <soap:operation soapAction="urn:sendData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryData">
+      <soap:operation soapAction="urn:queryData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DataSwitchImpSoap12Binding" type="ns:DataSwitchImpPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="queryData4Where">
+      <soap12:operation soapAction="urn:queryData4Where" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identity">
+      <soap12:operation soapAction="urn:identity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendData">
+      <soap12:operation soapAction="urn:sendData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryData">
+      <soap12:operation soapAction="urn:queryData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DataSwitchImpHttpBinding" type="ns:DataSwitchImpPortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="queryData4Where">
+      <http:operation location="DataSwitchImp/queryData4Where" />
+      <wsdl:input>
+        <mime:content part="queryData4Where" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryData4Where" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identity">
+      <http:operation location="DataSwitchImp/identity" />
+      <wsdl:input>
+        <mime:content part="identity" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="identity" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendData">
+      <http:operation location="DataSwitchImp/sendData" />
+      <wsdl:input>
+        <mime:content part="sendData" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="sendData" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="queryData">
+      <http:operation location="DataSwitchImp/queryData" />
+      <wsdl:input>
+        <mime:content part="queryData" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="queryData" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataSwitchImp">
+    <wsdl:port name="DataSwitchImpHttpSoap11Endpoint" binding="ns:DataSwitchImpSoap11Binding">
+      <soap:address location="http://192.168.255.14:8090/bjdsm-ws/services/DataSwitchImp.DataSwitchImpHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="DataSwitchImpHttpSoap12Endpoint" binding="ns:DataSwitchImpSoap12Binding">
+      <soap12:address location="http://192.168.255.14:8090/bjdsm-ws/services/DataSwitchImp.DataSwitchImpHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="DataSwitchImpHttpEndpoint" binding="ns:DataSwitchImpHttpBinding">
+      <http:address location="http://192.168.255.14:8090/bjdsm-ws/services/DataSwitchImp.DataSwitchImpHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
