@@ -110,7 +110,7 @@ namespace TestApp.FileManage
             }
         }
 
-
+        public void Rename5() { }
 
     }
 }
