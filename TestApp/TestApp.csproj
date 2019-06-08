@@ -99,12 +99,14 @@
     <Compile Include="Common\HttpWebSocket.cs" />
     <Compile Include="Common\TestClass.cs" />
     <Compile Include="Common\DownPic.cs" />
+    <Compile Include="FileManage\NewClass1.cs" />
     <Compile Include="FrmRename.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmRename.Designer.cs">
       <DependentUpon>FrmRename.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewFolder1\Class1.cs" />
     <Compile Include="WmOcr\WmCode.cs" />
     <Compile Include="FileManage\FileRename.cs" />
     <Compile Include="Form1.cs">

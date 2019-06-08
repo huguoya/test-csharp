@@ -161,6 +161,9 @@ namespace TestApp.FileManage
             }
             Console.WriteLine("over");
         }
+
+        private void R666() {
+        }
     }
 
     public class FileAtrr

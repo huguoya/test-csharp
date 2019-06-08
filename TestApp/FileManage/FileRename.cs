@@ -116,6 +116,8 @@ namespace TestApp.FileManage
         public void Rename7()
         {
         }
-
+        public void Rename8()
+        {
+        }
     }
 }
