@@ -16,9 +16,9 @@ using TestApp.WmOcr;
 
 namespace TestApp
 {
-    public partial class Form1 : Form
+    public partial class FrmGwyyt : Form
     {
-        public Form1()
+        public FrmGwyyt()
         {
             InitializeComponent();
         }

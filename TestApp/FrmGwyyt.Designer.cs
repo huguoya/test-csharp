@@ -1,6 +1,6 @@
 ﻿namespace TestApp
 {
-    partial class Form1
+    partial class FrmGwyyt
     {
         /// <summary>
         /// Required designer variable.

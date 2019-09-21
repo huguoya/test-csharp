@@ -19,6 +19,7 @@ namespace TestApp
         [STAThread]
         private static void Main(string[] args)
         {
+
             //var s = DateTime.Now.Minute % 15;
             //snew DeleteRepeatFile().TestDelete();
             //TestClass testClass = new TestClass();
@@ -52,9 +53,13 @@ namespace TestApp
 
             //new TestClass().GetFileVersion();
 
-            new TestClass().TestBcd();
+            //new TestClass().TestBcd();
+
+            new TestModbus().TestEasyModbus();
+
             Console.WriteLine("------over");
             Console.ReadLine();
         }
+
     }
 }
