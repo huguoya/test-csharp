@@ -55,8 +55,8 @@ namespace TestApp
 
             //new TestClass().TestBcd();
 
-            new TestModbus().TestEasyModbus();
-
+            //new TestModbus().TestEasyModbus();
+ 
             Console.WriteLine("------over");
             Console.ReadLine();
         }
