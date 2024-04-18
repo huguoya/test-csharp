@@ -127,6 +127,12 @@
       <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Woof.Core, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Woof.Core.2.2.0\lib\netstandard2.0\Woof.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Woof.System, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Woof.System.2.8.2\lib\net461\Woof.System.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Computer.cs" />

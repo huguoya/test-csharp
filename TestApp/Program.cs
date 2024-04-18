@@ -1,16 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using ciotems.open;
-using TestApp.Common;
-using TestApp.FileManage;
-using TestApp.FTP;
 
 namespace TestApp
 {
@@ -19,7 +7,6 @@ namespace TestApp
         [STAThread]
         private static void Main(string[] args)
         {
-
             //var s = DateTime.Now.Minute % 15;
             //snew DeleteRepeatFile().TestDelete();
             //TestClass testClass = new TestClass();
@@ -56,10 +43,9 @@ namespace TestApp
             //new TestClass().TestBcd();
 
             //new TestModbus().TestEasyModbus();
- 
+
             Console.WriteLine("------over");
             Console.ReadLine();
         }
-
     }
 }
