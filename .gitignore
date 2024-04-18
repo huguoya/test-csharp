@@ -1,5 +1,5 @@
 /packages/
-/.vs/
+*/.vs/
 bin/
 obj/
 *.vs10x
@@ -20,3 +20,4 @@ _Bin.*
 VSDoc
 /src/*.csdat
 *.lock.json
+/.vs
