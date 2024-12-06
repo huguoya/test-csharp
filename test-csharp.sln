@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{A5E2D7BF-0247-46A3-B23C-36F502BAD732}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1FDE7EF1-1668-4093-AA59-428C595A904F}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -19,11 +17,19 @@ Global
 		{A5E2D7BF-0247-46A3-B23C-36F502BAD732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5E2D7BF-0247-46A3-B23C-36F502BAD732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5E2D7BF-0247-46A3-B23C-36F502BAD732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FDE7EF1-1668-4093-AA59-428C595A904F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDE7EF1-1668-4093-AA59-428C595A904F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDE7EF1-1668-4093-AA59-428C595A904F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDE7EF1-1668-4093-AA59-428C595A904F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE5DF589-CD14-4454-A15A-F3DE55202444}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

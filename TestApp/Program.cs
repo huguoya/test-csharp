@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Windows.Forms;
+
+using TestApp.Common;
 
 namespace TestApp
 {
@@ -43,6 +46,8 @@ namespace TestApp
             //new TestClass().TestBcd();
 
             //new TestModbus().TestEasyModbus();
+
+            //var s = new TestClass().GetMathResult("10*10.101");
 
             Console.WriteLine("------over");
             Console.ReadLine();
