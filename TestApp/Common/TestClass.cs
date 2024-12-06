@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using Newtonsoft.Json;
+
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -27,6 +30,11 @@ namespace TestApp.Common
 
     public class TestClass
     {
+        public double GetMathResult(string expression)
+        {
+            return Convert.ToDouble(new DataTable().Compute(expression, ""));
+        }
+
         public void Sort()
         {
             var str = "123 23423 34 348 2345 3234 951 2344 444 4344";
@@ -75,21 +83,21 @@ namespace TestApp.Common
 
         public void GetIotCard()
         {
-            //用户code码
-            var entCode = "085458";
-            //用户密码
-            var secret = "2E1B811F701F3C7CEFD031689FE82924";
-            //物联卡基本信息（可用）
-            var API_IotCardInfoApi = "http://wl.51liubei.com/dhApi/iotCardInfoApi.api";
+            ////用户code码
+            //var entCode = "085458";
+            ////用户密码
+            //var secret = "2E1B811F701F3C7CEFD031689FE82924";
+            ////物联卡基本信息（可用）
+            //var API_IotCardInfoApi = "http://wl.51liubei.com/dhApi/iotCardInfoApi.api";
 
-            var iccid = "8986031746202530209Y";
-            RestSharp.Http http = new RestSharp.Http();
-            StringBuilder url = new StringBuilder(API_IotCardInfoApi);
-            url.Append("entCode=").Append(entCode).Append("&secret=").Append(secret)
-                     .Append("&iccid=").Append(iccid).Append("&access_token=");
-            //.Append(MD5.getAccessToken(Constants.entCode, Constants.secret));
-            //http.Url = new Uri();
-            http.Get();
+            //var iccid = "8986031746202530209Y";
+            //RestSharp.Http http = new RestSharp.Http();
+            //StringBuilder url = new StringBuilder(API_IotCardInfoApi);
+            //url.Append("entCode=").Append(entCode).Append("&secret=").Append(secret)
+            //         .Append("&iccid=").Append(iccid).Append("&access_token=");
+            ////.Append(MD5.getAccessToken(Constants.entCode, Constants.secret));
+            ////http.Url = new Uri();
+            //http.Get();
         }
 
         private void TestReadXmlConfig(string[] args)
