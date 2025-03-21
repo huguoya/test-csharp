@@ -159,6 +159,12 @@
     <Compile Include="Common\DownPic.cs" />
     <Compile Include="Common\TestModbus.cs" />
     <Compile Include="FileManage\NewClass1.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmRename.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGwyyt.resx">
       <DependentUpon>FrmGwyyt.cs</DependentUpon>
     </EmbeddedResource>

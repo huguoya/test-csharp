@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
 
-using RJCP.IO.Ports;
 
 
 namespace EnergyCollector.AllThreading.helper
@@ -14,7 +13,7 @@ namespace EnergyCollector.AllThreading.helper
         /// <summary>
         /// 串口资源
         /// </summary>
-        public SerialPortStream serialPort;
+        public SerialPort serialPort;
 
         /// <summary>
         /// 构造函数
@@ -23,7 +22,7 @@ namespace EnergyCollector.AllThreading.helper
         public SerialPortHelper(string port, string baudRate, string dataBit, string stopBit, string parityBit)
         {
             //根据表计通信参数的配置创建一个SerialPort对象,并进行初始化
-            serialPort = new SerialPortStream
+            serialPort = new SerialPort
             {
                 //端口号
                 PortName = port,
