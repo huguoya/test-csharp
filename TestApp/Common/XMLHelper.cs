@@ -193,7 +193,7 @@ namespace TestApp.Common
                     //遍历xpath节点下的所有子节点
                     foreach (XmlNode node in xmlNode.ChildNodes)
                     {
-                        if (node.Name.ToLower() == xmlNodeName.ToLower())
+                        if (node.Name.Equals(xmlNodeName, StringComparison.CurrentCultureIgnoreCase))
                         {
                             //存在此节点则更新
                             node.InnerXml = innerText;
@@ -241,7 +241,7 @@ namespace TestApp.Common
                     //遍历xpath节点中的所有属性
                     foreach (XmlAttribute attribute in xmlNode.Attributes)
                     {
-                        if (attribute.Name.ToLower() == xmlAttributeName.ToLower())
+                        if (attribute.Name.Equals(xmlAttributeName, StringComparison.CurrentCultureIgnoreCase))
                         {
                             //节点中存在此属性则更新
                             attribute.Value = value;
@@ -322,7 +322,7 @@ namespace TestApp.Common
                     //遍历xpath节点中的所有属性
                     foreach (XmlAttribute attribute in xmlNode.Attributes)
                     {
-                        if (attribute.Name.ToLower() == xmlAttributeName.ToLower())
+                        if (attribute.Name.Equals(xmlAttributeName, StringComparison.CurrentCultureIgnoreCase))
                         {
                             //节点中存在此属性
                             xmlAttribute = attribute;

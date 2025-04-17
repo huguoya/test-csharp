@@ -1,18 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using System;
 using System.Runtime.Versioning;
 
-using Microsoft.Win32;
+using TestApp.Common;
+using TestApp.FTP;
+
+namespace dotnet8;
+
 
 
 [SupportedOSPlatform("windows6.1")]
 class Program
 {
+
     [MTAThread]
-    private static void Main(string[] args)
+    private static void Main()
     {
-        System.Console.WriteLine("hello world");
+        //Test104.TestMain();
+        //FtpTest.Upload();
+        TestModbus.TestFlunetModbusTcp();
         System.Console.ReadLine();
     }
 }

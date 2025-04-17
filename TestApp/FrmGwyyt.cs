@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using TestApp.WmOcr;
 
 namespace TestApp
 {
+    [SupportedOSPlatform("windows6.1")]
     public partial class FrmGwyyt : Form
     {
         public FrmGwyyt()
@@ -251,7 +253,7 @@ namespace TestApp
             request.Headers.Add("Accept-Encoding", "gzip, deflate");
             request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
             request.Headers.Add("X-Requested-With", "XMLHttpRequest");
-            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; BRI/2)";
+            request.Headers["User-Agent"] = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; BRI/2)";
             request.Referer = "http://www.95598.cn/gov/as/ecq/quePowerInfo.jsp?partNo=GM03001002";
             request.Headers.Add("Cookie", pCookie);
 

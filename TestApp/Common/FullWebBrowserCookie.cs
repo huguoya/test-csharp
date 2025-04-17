@@ -10,7 +10,7 @@ namespace TestApp.Common
 {
     internal sealed class NativeMethods
     {
-        #region enums
+        #region enums  
 
         public enum ErrorFlags
         {
@@ -21,42 +21,40 @@ namespace TestApp.Common
 
         public enum InternetFlags
         {
-            INTERNET_COOKIE_HTTPONLY = 8192, //Requires IE 8 or higher
+            INTERNET_COOKIE_HTTPONLY = 8192, //Requires IE 8 or higher  
             INTERNET_COOKIE_THIRD_PARTY = 131072,
             INTERNET_FLAG_RESTRICTED_ZONE = 16
         }
 
-        #endregion enums
+        #endregion enums  
 
-        #region DLL Imports
+        #region DLL Imports  
 
-        [SuppressUnmanagedCodeSecurity, SecurityCritical, DllImport("wininet.dll", EntryPoint = "InternetGetCookieExW", CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
+        [DllImport("wininet.dll", EntryPoint = "InternetGetCookieExW", CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
         internal static extern bool InternetGetCookieEx([In] string Url, [In] string cookieName, [Out] StringBuilder cookieData, [In, Out] ref uint pchCookieData, uint flags, IntPtr reserved);
 
-        #endregion DLL Imports
+        #endregion DLL Imports  
     }
 
-    /// <SUMMARY></SUMMARY>
-    /// 取得WebBrowser的完整Cookie。
-    /// 因为默认的webBrowser1.Document.Cookie取不到HttpOnly的Cookie
-    ///
+    /// <SUMMARY></SUMMARY>  
+    /// 取得WebBrowser的完整Cookie。  
+    /// 因为默认的webBrowser1.Document.Cookie取不到HttpOnly的Cookie  
+    ///  
     public class FullWebBrowserCookie
     {
-        [SecurityCritical]
         public static string GetCookieInternal(Uri uri, bool throwIfNoCookie)
         {
             uint pchCookieData = 0;
             string url = UriToString(uri);
             uint flag = (uint)NativeMethods.InternetFlags.INTERNET_COOKIE_HTTPONLY;
-            //Gets the size of the string builder
+            //Gets the size of the string builder  
             if (NativeMethods.InternetGetCookieEx(url, null, null, ref pchCookieData, flag, IntPtr.Zero))
             {
                 pchCookieData++;
                 StringBuilder cookieData = new StringBuilder((int)pchCookieData);
-                //Read the cookie
+                //Read the cookie  
                 if (NativeMethods.InternetGetCookieEx(url, null, cookieData, ref pchCookieData, flag, IntPtr.Zero))
                 {
-                    DemandWebPermission(uri);
                     return cookieData.ToString();
                 }
             }
@@ -66,20 +64,6 @@ namespace TestApp.Common
                 throw new Win32Exception(lastErrorCode);
             }
             return null;
-        }
-
-        private static void DemandWebPermission(Uri uri)
-        {
-            string uriString = UriToString(uri);
-            if (uri.IsFile)
-            {
-                string localPath = uri.LocalPath;
-                new FileIOPermission(FileIOPermissionAccess.Read, localPath).Demand();
-            }
-            else
-            {
-                new WebPermission(NetworkAccess.Connect, uriString).Demand();
-            }
         }
 
         private static string UriToString(Uri uri)

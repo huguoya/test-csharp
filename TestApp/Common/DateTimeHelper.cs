@@ -19,29 +19,16 @@ namespace TestApp.Common
         /// <returns></returns>
         public static DateTime ConvertStrToDatetime(string s)
         {
-            switch (s.Length)
+            return s.Length switch
             {
-                case 4:
-                    return ConvertStrToDatetime(s, FORMAT_YEAR);
-
-                case 6:
-                    return ConvertStrToDatetime(s, FORMAT_MONTH);
-
-                case 8:
-                    return ConvertStrToDatetime(s, FORMAT_DAY);
-
-                case 10:
-                    return ConvertStrToDatetime(s, FORMAT_HOUR);
-
-                case 12:
-                    return ConvertStrToDatetime(s, FORMAT_MINUTE);
-
-                case 14:
-                    return ConvertStrToDatetime(s, FORMAT_SECOND);
-
-                default:
-                    return ConvertStrToDatetime("2000", FORMAT_YEAR);
-            }
+                4 => ConvertStrToDatetime(s, FORMAT_YEAR),
+                6 => ConvertStrToDatetime(s, FORMAT_MONTH),
+                8 => ConvertStrToDatetime(s, FORMAT_DAY),
+                10 => ConvertStrToDatetime(s, FORMAT_HOUR),
+                12 => ConvertStrToDatetime(s, FORMAT_MINUTE),
+                14 => ConvertStrToDatetime(s, FORMAT_SECOND),
+                _ => ConvertStrToDatetime("2000", FORMAT_YEAR),
+            };
         }
 
         /// <summary>
@@ -73,7 +60,7 @@ namespace TestApp.Common
         /// <returns>13位 时间戳</returns>
         public static long ConvertDateTimeToLong(DateTime dt)
         {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            DateTime dtStart = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1)).ToLocalTime();
             long timeStamp = (dt.Ticks - dtStart.Ticks) / 10000;
             return timeStamp;
         }
@@ -105,35 +92,16 @@ namespace TestApp.Common
         public static EnumDateType GetDateType(string dateType)
         {
             dateType = dateType.ToLower().Trim();
-            switch (dateType)
+            return dateType switch
             {
-                case "y":
-                case "year":
-                    return EnumDateType.Year;
-
-                case "M":
-                case "month":
-                    return EnumDateType.Month;
-
-                case "d":
-                case "day":
-                    return EnumDateType.Day;
-
-                case "H":
-                case "hour":
-                    return EnumDateType.Hour;
-
-                case "m":
-                case "minute":
-                    return EnumDateType.Minute;
-
-                case "s":
-                case "second":
-                    return EnumDateType.Second;
-
-                default:
-                    return EnumDateType.Minute;
-            }
+                "y" or "year" => EnumDateType.Year,
+                "M" or "month" => EnumDateType.Month,
+                "d" or "day" => EnumDateType.Day,
+                "H" or "hour" => EnumDateType.Hour,
+                "m" or "minute" => EnumDateType.Minute,
+                "s" or "second" => EnumDateType.Second,
+                _ => EnumDateType.Minute,
+            };
         }
 
         /// <summary>
@@ -143,29 +111,16 @@ namespace TestApp.Common
         /// <returns></returns>
         public static string GetDateFormatByDateType(EnumDateType dateType)
         {
-            switch (dateType)
+            return dateType switch
             {
-                case EnumDateType.Year:
-                    return FORMAT_YEAR;
-
-                case EnumDateType.Month:
-                    return FORMAT_MONTH;
-
-                case EnumDateType.Day:
-                    return FORMAT_DAY;
-
-                case EnumDateType.Hour:
-                    return FORMAT_HOUR;
-
-                case EnumDateType.Minute:
-                    return FORMAT_MINUTE;
-
-                case EnumDateType.Second:
-                    return FORMAT_SECOND;
-
-                default:
-                    return string.Empty;
-            }
+                EnumDateType.Year => FORMAT_YEAR,
+                EnumDateType.Month => FORMAT_MONTH,
+                EnumDateType.Day => FORMAT_DAY,
+                EnumDateType.Hour => FORMAT_HOUR,
+                EnumDateType.Minute => FORMAT_MINUTE,
+                EnumDateType.Second => FORMAT_SECOND,
+                _ => string.Empty,
+            };
         }
 
         /// <summary>
@@ -176,29 +131,16 @@ namespace TestApp.Common
         /// <returns></returns>
         public static DateTime GetDateTimeByType(EnumDateType dateType, int number)
         {
-            switch (dateType)
+            return dateType switch
             {
-                case EnumDateType.Year:
-                    return DateTime.Now.AddYears(-number);
-
-                case EnumDateType.Month:
-                    return DateTime.Now.AddMonths(-number);
-
-                case EnumDateType.Day:
-                    return DateTime.Now.AddDays(-number);
-
-                case EnumDateType.Hour:
-                    return DateTime.Now.AddHours(-number);
-
-                case EnumDateType.Minute:
-                    return DateTime.Now.AddMinutes(-number);
-
-                case EnumDateType.Second:
-                    return DateTime.Now.AddSeconds(-number);
-
-                default:
-                    return DateTime.Now;
-            }
+                EnumDateType.Year => DateTime.Now.AddYears(-number),
+                EnumDateType.Month => DateTime.Now.AddMonths(-number),
+                EnumDateType.Day => DateTime.Now.AddDays(-number),
+                EnumDateType.Hour => DateTime.Now.AddHours(-number),
+                EnumDateType.Minute => DateTime.Now.AddMinutes(-number),
+                EnumDateType.Second => DateTime.Now.AddSeconds(-number),
+                _ => DateTime.Now,
+            };
         }
 
         /// <summary>
@@ -229,10 +171,8 @@ namespace TestApp.Common
         /// <returns></returns>
         public static DateTime ConvertLongToDateTime(long d)
         {
-            var time = DateTime.MinValue;
-            var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-            time = startTime.AddMilliseconds(d);
-            return time;
+            var startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1)).ToLocalTime();
+            return startTime.AddMilliseconds(d);
         }
 
         /// <summary>

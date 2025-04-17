@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net.Security;
 using System.Net.Sockets;
+using System.Runtime.Versioning;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TestApp.Common
 {
+
+    [SupportedOSPlatform("windows6.1")]
     public class HttpWebSocket
     {
         /// <summary>
@@ -160,7 +161,7 @@ namespace TestApp.Common
             }
             else
             {
-                result = unGzip(result);
+                result = UnGzip(result);
             }
 
             return result;
@@ -267,14 +268,14 @@ namespace TestApp.Common
         private byte[] GetSendHeaders(Uri uri, string referer, string postData)
         {
             string sendString = @"{0} {1} HTTP/1.1
-Host: {3}
-Connection: Keep-Alive
-Authorization: Basic YWRtaW46YWRtaW4=
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
-";
+                                Host: {3}
+                                Connection: Keep-Alive
+                                Authorization: Basic YWRtaW46YWRtaW4=
+                                User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36
+                                Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+                                Accept-Encoding: gzip, deflate
+                                Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+                                ";
 
             sendString = string.Format(sendString, string.IsNullOrWhiteSpace(postData) ? "GET" : "POST", uri.PathAndQuery
                 , string.IsNullOrWhiteSpace(referer) ? uri.AbsoluteUri : referer, uri.Host);
@@ -290,13 +291,9 @@ Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
             }
             else
             {
-                int dlength = Encoding.UTF8.GetBytes(postData).Length;
-
                 sendString += string.Format(@"Content-Type: application/x-www-form-urlencoded
-Content-Length: {0}
-
-{1}
-", postData.Length, postData);
+                                                Content-Length: {0}
+                                                {1}", postData.Length, postData);
             }
 
             return Encoding.UTF8.GetBytes(sendString);
@@ -311,7 +308,7 @@ Content-Length: {0}
         {
             if (string.IsNullOrWhiteSpace(headText))
             {
-                throw new ArgumentNullException("'WithHeadersText' cannot be empty.");
+                throw new Exception("'WithHeadersText' cannot be empty.");
             }
 
             //Match m = Regex.Match( withHeadersText,@".*(?=\r\n\r\n)",  RegexOptions.Singleline | RegexOptions.IgnoreCase );
@@ -321,7 +318,7 @@ Content-Length: {0}
             //    throw new HttpParseException( "'SetThisHeaders' method has bug." );
             //}
 
-            string[] headers = headText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] headers = headText.Split(["\r\n"], StringSplitOptions.RemoveEmptyEntries);
 
             if (headers == null || headers.Length == 0)
             {
@@ -343,7 +340,7 @@ Content-Length: {0}
                 else if (head.StartsWith("Set-Cookie:", StringComparison.OrdinalIgnoreCase))
                 {
                     this.Cookies = this.Cookies ?? new List<string>();
-                    string tCookie = head.Substring(11, head.IndexOf(";") < 0 ? head.Length - 11 : head.IndexOf(";") - 10).Trim();
+                    string tCookie = head.Substring(11, head.IndexOf(';') < 0 ? head.Length - 11 : head.IndexOf(';') - 10).Trim();
 
                     if (!this.Cookies.Exists(f => f.Split('=')[0] == tCookie.Split('=')[0]))
                     {
@@ -356,22 +353,22 @@ Content-Length: {0}
                 }
                 else if (head.StartsWith("Content-Encoding:", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (head.IndexOf("gzip", StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (head.Contains("gzip", StringComparison.OrdinalIgnoreCase))
                     {
                         this.HttpHeaders.IsGzip = true;
                     }
                 }
                 else if (head.StartsWith("Content-Type:", StringComparison.OrdinalIgnoreCase))
                 {
-                    string[] types = head.Substring(13).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] types = head.Substring(13).Split([';'], StringSplitOptions.RemoveEmptyEntries);
 
                     foreach (string t in types)
                     {
-                        if (t.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (t.Contains("charset=", StringComparison.OrdinalIgnoreCase))
                         {
                             this.HttpHeaders.Charset = t.Trim().Substring(8);
                         }
-                        else if (t.IndexOf('/') >= 0)
+                        else if (t.Contains('/'))
                         {
                             this.HttpHeaders.ContentType = t.Trim();
                         }
@@ -393,11 +390,11 @@ Content-Length: {0}
         /// </summary>
         /// <param name="data">数据流, 压缩或未压缩的.</param>
         /// <returns>返回解压缩的数据流</returns>
-        private MemoryStream unGzip(MemoryStream data)
+        private MemoryStream UnGzip(MemoryStream data)
         {
             if (data == null)
             {
-                throw new ArgumentNullException("data cannot be null.", "data");
+                throw new Exception("data cannot be null.");
             }
 
             data.Seek(0, SeekOrigin.Begin);

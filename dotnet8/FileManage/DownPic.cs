@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace TestApp.Common
+namespace dotnet8.FileManage
 {
     public class DownPic
     {
-        private string dirPath = @"E:\MyFile\new\p\";
+        private readonly string dirPath = @"E:\MyFile\new\p\";
 
         public void TestMain()
         {
@@ -31,18 +29,18 @@ namespace TestApp.Common
                 Console.WriteLine("anlysis:" + fileDir);
                 string html = File.ReadAllText(fileDir);
                 List<string> urlList = GetUrlList(html);
-                string fileName = fileDir.Substring(0, fileDir.LastIndexOf("\\"));
+                string fileName = fileDir.Substring(0, fileDir.LastIndexOf('\\'));
                 WriteUrlList(urlList, dirPath + fileName + "\\" + fileName + ".txt");
                 Console.WriteLine("---------------");
             }
         }
+        private static readonly HttpClient httpClient = new(); // Use a single instance of HttpClient
 
         public string DownHtml(string url)
         {
             try
             {
-                WebClient client = new WebClient();
-                return client.DownloadString(url);
+                return httpClient.GetStringAsync(url).Result;
             }
             catch (Exception ex)
             {
@@ -160,12 +158,17 @@ namespace TestApp.Common
         {
             try
             {
-                WebClient mywebclient = new WebClient();
                 string filePath = dirPath + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".jpg";
-                mywebclient.DownloadFile(url, filePath);
+                using (var response = httpClient.GetAsync(url).Result)
+                {
+                    response.EnsureSuccessStatusCode();
+                    var fileBytes = response.Content.ReadAsByteArrayAsync().Result;
+                    File.WriteAllBytes(filePath, fileBytes);
+                }
+
                 Console.WriteLine("down:" + filePath);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }

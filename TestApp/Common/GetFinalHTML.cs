@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using System.Windows.Forms;
 
 namespace TestApp.Common
 {
+    [SupportedOSPlatform("windows6.1")]
+
     public class FinalHtml
     {
         private String htmlString;
@@ -104,9 +107,18 @@ namespace TestApp.Common
             // 超时处理
             if (newThread.IsAlive)
             {
-                if (success) return true;
+                if (success)
+                {
+                    return true;
+                }
+                // Replace the following line:
                 newThread.Abort();
-                return false;
+
+                // With the following code:
+                if (!success)
+                {
+                    newThread.Interrupt();
+                }
             }
             return true;
         }

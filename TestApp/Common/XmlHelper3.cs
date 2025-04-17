@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Script.Serialization;
 
 namespace TestApp.Common
 {
@@ -61,7 +57,7 @@ namespace TestApp.Common
         /// <returns></returns>
         public static T DeserializeXmlFileToObject<T>(string xmlFilename)
         {
-            T returnObject = default(T);
+            T returnObject = default;
             if (string.IsNullOrEmpty(xmlFilename))
             {
                 return default(T);

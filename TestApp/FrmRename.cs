@@ -2,10 +2,13 @@
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace TestApp
 {
+
+    [SupportedOSPlatform("windows6.1")]
     public partial class FrmRename : Form
     {
         public FrmRename()
@@ -46,7 +49,7 @@ namespace TestApp
                 var strs = fileName.Split(' ');
                 if (strs.Length > 1 && strs[0].Contains('-'))
                 {
-                    strs[0] = strs[0].Substring(strs[0].IndexOf(")") + 1) + " " + name + " ";
+                    strs[0] = strs[0].Substring(strs[0].IndexOf(')') + 1) + " " + name + " ";
                     fileName = string.Join(" ", strs).Replace("  ", " ").Replace("  ", " ").Replace("  ", " ").Trim();
                     file.MoveTo(dir + "\\" + fileName);
                 }

@@ -124,7 +124,7 @@ namespace TestApp.Common
 
         public static XmlNode AddNode(XmlDocument xDoc, XmlNode xNode, string xNodeName, string xNodeText)
         {
-            XmlNode xNodeChild = xDoc.CreateElement(xNodeName);
+            var xNodeChild = xDoc.CreateElement(xNodeName);
             xNodeChild.InnerText = xNodeText;
             xNode.AppendChild(xNodeChild);
             return xNodeChild;
@@ -132,7 +132,7 @@ namespace TestApp.Common
 
         public static XmlNode AddNode(XmlDocument xDoc, XmlNode xNode, string xNodeName, string xNodeText, string[] attrNames, string[] attrTexts)
         {
-            XmlNode xNodeChild = xDoc.CreateElement(xNodeName);
+            var xNodeChild = xDoc.CreateElement(xNodeName);
             xNodeChild.InnerText = xNodeText;
             if (attrNames != null && attrTexts != null && attrNames.Length > 0 && attrNames.Length == attrTexts.Length)
             {

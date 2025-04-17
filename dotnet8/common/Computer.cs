@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp.Common
+
+namespace dotnet8.common
 {
     /// <summary>
     /// Author ZZH
@@ -20,6 +22,8 @@ namespace TestApp.Common
     /// 系统（系统名称，系统型号）
     /// 内存（内存大小）
     /// </summary>
+    [SupportedOSPlatform("windows6.1")]
+    /// 
     public class Computer
     {
         /// <summary>
@@ -57,8 +61,7 @@ namespace TestApp.Common
         private static Computer _instance;
         public static Computer Instance()
         {
-            if (_instance == null)
-                _instance = new Computer();
+            _instance ??= new Computer();
             return _instance;
         }
         protected Computer()
@@ -72,7 +75,7 @@ namespace TestApp.Common
             TotalPhysicalMemory = GetTotalPhysicalMemory();
             ComputerName = GetComputerName();
         }
-        string GetCpuID()
+        static string GetCpuID()
         {
             try
             {
@@ -80,7 +83,7 @@ namespace TestApp.Common
                 string cpuInfo = "";//cpu序列号
                 ManagementClass mc = new ManagementClass("Win32_Processor");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
                 }
@@ -93,7 +96,7 @@ namespace TestApp.Common
                 return "unknow";
             }
         }
-        string GetMacAddress()
+        static string GetMacAddress()
         {
             try
             {
@@ -101,7 +104,7 @@ namespace TestApp.Common
                 string mac = "";
                 ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     if ((bool)mo["IPEnabled"] == true)
                     {
@@ -118,7 +121,7 @@ namespace TestApp.Common
                 return "unknow";
             }
         }
-        string GetIPAddress()
+        static string GetIPAddress()
         {
             try
             {
@@ -126,13 +129,13 @@ namespace TestApp.Common
                 string st = "";
                 ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     if ((bool)mo["IPEnabled"] == true)
                     {
                         //st=mo["IpAddress"].ToString();
-                        System.Array ar;
-                        ar = (System.Array)(mo.Properties["IpAddress"].Value);
+                        Array ar;
+                        ar = (Array)mo.Properties["IpAddress"].Value;
                         st = ar.GetValue(0).ToString();
                         break;
                     }
@@ -146,15 +149,15 @@ namespace TestApp.Common
                 return "unknow";
             }
         }
-        string GetDiskID()
+        static string GetDiskID()
         {
             try
             {
                 //获取硬盘ID
-                String HDid = "";
+                string HDid = "";
                 ManagementClass mc = new ManagementClass("Win32_DiskDrive");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     HDid = (string)mo.Properties["Model"].Value;
                 }
@@ -172,14 +175,14 @@ namespace TestApp.Common
         /// 操作系统的登录用户名
         /// </summary>
         /// <returns></returns>
-        string GetUserName()
+        static string GetUserName()
         {
             try
             {
                 string st = "";
                 ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     st = mo["UserName"].ToString();
                 }
@@ -198,14 +201,14 @@ namespace TestApp.Common
         /// PC类型
         /// </summary>
         /// <returns></returns>
-        string GetSystemType()
+        static string GetSystemType()
         {
             try
             {
                 string st = "";
                 ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     st = mo["SystemType"].ToString();
                 }
@@ -224,7 +227,7 @@ namespace TestApp.Common
         /// 物理内存
         /// </summary>
         /// <returns></returns>
-        string GetTotalPhysicalMemory()
+        static string GetTotalPhysicalMemory()
         {
             try
             {
@@ -232,7 +235,7 @@ namespace TestApp.Common
                 string st = "";
                 ManagementClass mc = new ManagementClass("Win32_ComputerSystem");
                 ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
+                foreach (ManagementObject mo in moc.Cast<ManagementObject>())
                 {
                     st = mo["TotalPhysicalMemory"].ToString();
                 }
@@ -249,11 +252,11 @@ namespace TestApp.Common
         /// 系统名称
         /// </summary>
         /// <returns></returns>
-        string GetComputerName()
+        static string GetComputerName()
         {
             try
             {
-                return System.Environment.GetEnvironmentVariable("ComputerName");
+                return Environment.GetEnvironmentVariable("ComputerName");
             }
             catch
             {
