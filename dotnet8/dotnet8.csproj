@@ -5,6 +5,7 @@
     <!--<ImplicitUsings>enable</ImplicitUsings>-->
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentFTP" />
     <PackageReference Include="FluentModbus" />
     <PackageReference Include="Ftp.dll" />
     <PackageReference Include="lib60870.NET" />

@@ -19,8 +19,8 @@ class Program
     private static void Main()
     {
         //Test104.TestMain();
-        //FtpTest.Upload();
-        TestModbus.TestFlunetModbusTcp();
+        //TestFtp.FluentFTPUpload();
+        //TestModbus.TestFlunetModbusTcp();
         System.Console.ReadLine();
     }
 }
